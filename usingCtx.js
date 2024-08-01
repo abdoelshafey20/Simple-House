@@ -1,47 +1,73 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _usingCtx;
 function _usingCtx() {
-  var r = "function" == typeof SuppressedError ? SuppressedError : function (r, n) {
-      var e = Error();
-      return e.name = "SuppressedError", e.error = r, e.suppressed = n, e;
+  var _disposeSuppressedError = typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed) {
+      var err = new Error();
+      err.name = "SuppressedError";
+      err.error = error;
+      err.suppressed = suppressed;
+      return err;
     },
-    n = {},
-    e = [];
-  function using(r, n) {
-    if (null != n) {
-      if (Object(n) !== n) throw new TypeError("using declarations can only be used with objects, functions, null, or undefined.");
-      if (r) var o = n[Symbol.asyncDispose || Symbol["for"]("Symbol.asyncDispose")];
-      if (null == o && (o = n[Symbol.dispose || Symbol["for"]("Symbol.dispose")]), "function" != typeof o) throw new TypeError("Property [Symbol.dispose] is not a function.");
-      e.push({
-        v: n,
-        d: o,
-        a: r
+    empty = {},
+    stack = [];
+  function using(isAwait, value) {
+    if (value != null) {
+      if (Object(value) !== value) {
+        throw new TypeError("using declarations can only be used with objects, functions, null, or undefined.");
+      }
+      if (isAwait) {
+        var dispose = value[Symbol.asyncDispose || Symbol.for("Symbol.asyncDispose")];
+      }
+      if (dispose == null) {
+        dispose = value[Symbol.dispose || Symbol.for("Symbol.dispose")];
+      }
+      if (typeof dispose !== "function") {
+        throw new TypeError(`Property [Symbol.dispose] is not a function.`);
+      }
+      stack.push({
+        v: value,
+        d: dispose,
+        a: isAwait
       });
-    } else r && e.push({
-      d: n,
-      a: r
-    });
-    return n;
+    } else if (isAwait) {
+      stack.push({
+        d: value,
+        a: isAwait
+      });
+    }
+    return value;
   }
   return {
-    e: n,
-    u: using.bind(null, !1),
-    a: using.bind(null, !0),
-    d: function d() {
-      var o = this.e;
+    e: empty,
+    u: using.bind(null, false),
+    a: using.bind(null, true),
+    d: function () {
+      var error = this.e;
       function next() {
-        for (; r = e.pop();) try {
-          var r,
-            t = r.d && r.d.call(r.v);
-          if (r.a) return Promise.resolve(t).then(next, err);
-        } catch (r) {
-          return err(r);
+        while (resource = stack.pop()) {
+          try {
+            var resource,
+              disposalResult = resource.d && resource.d.call(resource.v);
+            if (resource.a) {
+              return Promise.resolve(disposalResult).then(next, err);
+            }
+          } catch (e) {
+            return err(e);
+          }
         }
-        if (o !== n) throw o;
+        if (error !== empty) throw error;
       }
       function err(e) {
-        return o = o !== n ? new r(e, o) : e, next();
+        error = error !== empty ? new _disposeSuppressedError(e, error) : e;
+        return next();
       }
       return next();
     }
   };
 }
-module.exports = _usingCtx, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=usingCtx.js.map

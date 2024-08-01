@@ -1,51 +1,66 @@
-var _typeof = require("./typeof.js")["default"];
-var setPrototypeOf = require("./setPrototypeOf.js");
-var inherits = require("./inherits.js");
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _wrapRegExp;
+var _setPrototypeOf = require("setPrototypeOf");
+var _inherits = require("inherits");
 function _wrapRegExp() {
-  module.exports = _wrapRegExp = function _wrapRegExp(e, r) {
-    return new BabelRegExp(e, void 0, r);
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
-  var e = RegExp.prototype,
-    r = new WeakMap();
-  function BabelRegExp(e, t, p) {
-    var o = RegExp(e, t);
-    return r.set(o, p || r.get(e)), setPrototypeOf(o, BabelRegExp.prototype);
+  exports.default = _wrapRegExp = function (re, groups) {
+    return new BabelRegExp(re, undefined, groups);
+  };
+  var _super = RegExp.prototype;
+  var _groups = new WeakMap();
+  function BabelRegExp(re, flags, groups) {
+    var _this = new RegExp(re, flags);
+    _groups.set(_this, groups || _groups.get(re));
+    return _setPrototypeOf(_this, BabelRegExp.prototype);
   }
-  function buildGroups(e, t) {
-    var p = r.get(t);
-    return Object.keys(p).reduce(function (r, t) {
-      var o = p[t];
-      if ("number" == typeof o) r[t] = e[o];else {
-        for (var i = 0; void 0 === e[o[i]] && i + 1 < o.length;) i++;
-        r[t] = e[o[i]];
+  _inherits(BabelRegExp, RegExp);
+  BabelRegExp.prototype.exec = function (str) {
+    var result = _super.exec.call(this, str);
+    if (result) {
+      result.groups = buildGroups(result, this);
+      var indices = result.indices;
+      if (indices) indices.groups = buildGroups(indices, this);
+    }
+    return result;
+  };
+  BabelRegExp.prototype[Symbol.replace] = function (str, substitution) {
+    if (typeof substitution === "string") {
+      var groups = _groups.get(this);
+      return _super[Symbol.replace].call(this, str, substitution.replace(/\$<([^>]+)>/g, function (_, name) {
+        var group = groups[name];
+        return "$" + (Array.isArray(group) ? group.join("$") : group);
+      }));
+    } else if (typeof substitution === "function") {
+      var _this = this;
+      return _super[Symbol.replace].call(this, str, function () {
+        var args = arguments;
+        if (typeof args[args.length - 1] !== "object") {
+          args = [].slice.call(args);
+          args.push(buildGroups(args, _this));
+        }
+        return substitution.apply(this, args);
+      });
+    } else {
+      return _super[Symbol.replace].call(this, str, substitution);
+    }
+  };
+  function buildGroups(result, re) {
+    var g = _groups.get(re);
+    return Object.keys(g).reduce(function (groups, name) {
+      var i = g[name];
+      if (typeof i === "number") groups[name] = result[i];else {
+        var k = 0;
+        while (result[i[k]] === undefined && k + 1 < i.length) k++;
+        groups[name] = result[i[k]];
       }
-      return r;
+      return groups;
     }, Object.create(null));
   }
-  return inherits(BabelRegExp, RegExp), BabelRegExp.prototype.exec = function (r) {
-    var t = e.exec.call(this, r);
-    if (t) {
-      t.groups = buildGroups(t, this);
-      var p = t.indices;
-      p && (p.groups = buildGroups(p, this));
-    }
-    return t;
-  }, BabelRegExp.prototype[Symbol.replace] = function (t, p) {
-    if ("string" == typeof p) {
-      var o = r.get(this);
-      return e[Symbol.replace].call(this, t, p.replace(/\$<([^>]+)>/g, function (e, r) {
-        var t = o[r];
-        return "$" + (Array.isArray(t) ? t.join("$") : t);
-      }));
-    }
-    if ("function" == typeof p) {
-      var i = this;
-      return e[Symbol.replace].call(this, t, function () {
-        var e = arguments;
-        return "object" != _typeof(e[e.length - 1]) && (e = [].slice.call(e)).push(buildGroups(e, i)), p.apply(this, e);
-      });
-    }
-    return e[Symbol.replace].call(this, t, p);
-  }, _wrapRegExp.apply(this, arguments);
+  return _wrapRegExp.apply(this, arguments);
 }
-module.exports = _wrapRegExp, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=wrapRegExp.js.map

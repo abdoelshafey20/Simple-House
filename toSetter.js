@@ -1,10 +1,18 @@
-function _toSetter(t, e, n) {
-  e || (e = []);
-  var r = e.length++;
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _toSetter;
+function _toSetter(fn, args, thisArg) {
+  if (!args) args = [];
+  var l = args.length++;
   return Object.defineProperty({}, "_", {
-    set: function set(o) {
-      e[r] = o, t.apply(n, e);
+    set: function (v) {
+      args[l] = v;
+      fn.apply(thisArg, args);
     }
   });
 }
-module.exports = _toSetter, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=toSetter.js.map
