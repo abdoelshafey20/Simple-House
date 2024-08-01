@@ -1,12 +1,21 @@
-var _typeof = require("./typeof.js")["default"];
-function setFunctionName(e, t, n) {
-  "symbol" == _typeof(t) && (t = (t = t.description) ? "[" + t + "]" : "");
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = setFunctionName;
+function setFunctionName(fn, name, prefix) {
+  if (typeof name === "symbol") {
+    name = name.description;
+    name = name ? "[" + name + "]" : "";
+  }
   try {
-    Object.defineProperty(e, "name", {
-      configurable: !0,
-      value: n ? n + " " + t : t
+    Object.defineProperty(fn, "name", {
+      configurable: true,
+      value: prefix ? prefix + " " + name : name
     });
-  } catch (e) {}
-  return e;
+  } catch (_) {}
+  return fn;
 }
-module.exports = setFunctionName, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=setFunctionName.js.map

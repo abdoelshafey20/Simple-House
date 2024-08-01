@@ -1,10 +1,22 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _extends;
 function _extends() {
-  return (module.exports = _extends = Object.assign ? Object.assign.bind() : function (n) {
-    for (var e = 1; e < arguments.length; e++) {
-      var t = arguments[e];
-      for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]);
+  exports.default = _extends = Object.assign ? Object.assign.bind() : function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
     }
-    return n;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports), _extends.apply(null, arguments);
+    return target;
+  };
+  return _extends.apply(null, arguments);
 }
-module.exports = _extends, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=extends.js.map

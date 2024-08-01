@@ -1,4 +1,11 @@
-function _identity(t) {
-  return t;
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _identity;
+function _identity(x) {
+  return x;
 }
-module.exports = _identity, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=identity.js.map

@@ -1,4 +1,11 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _nullishReceiverError;
 function _nullishReceiverError(r) {
   throw new TypeError("Cannot set property of null or undefined.");
 }
-module.exports = _nullishReceiverError, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=nullishReceiverError.js.map

@@ -1,7 +1,15 @@
-function _skipFirstGeneratorNext(t) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _skipFirstGeneratorNext;
+function _skipFirstGeneratorNext(fn) {
   return function () {
-    var r = t.apply(this, arguments);
-    return r.next(), r;
+    var it = fn.apply(this, arguments);
+    it.next();
+    return it;
   };
 }
-module.exports = _skipFirstGeneratorNext, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=skipFirstGeneratorNext.js.map

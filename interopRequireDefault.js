@@ -1,6 +1,13 @@
-function _interopRequireDefault(e) {
-  return e && e.__esModule ? e : {
-    "default": e
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _interopRequireDefault;
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
   };
 }
-module.exports = _interopRequireDefault, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=interopRequireDefault.js.map

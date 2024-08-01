@@ -1,8 +1,16 @@
-function _defineAccessor(e, r, n, t) {
-  var c = {
-    configurable: !0,
-    enumerable: !0
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _defineAccessor;
+function _defineAccessor(type, obj, key, fn) {
+  var desc = {
+    configurable: true,
+    enumerable: true
   };
-  return c[e] = t, Object.defineProperty(r, n, c);
+  desc[type] = fn;
+  return Object.defineProperty(obj, key, desc);
 }
-module.exports = _defineAccessor, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=defineAccessor.js.map

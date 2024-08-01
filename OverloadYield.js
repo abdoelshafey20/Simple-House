@@ -1,4 +1,12 @@
-function _OverloadYield(e, d) {
-  this.v = e, this.k = d;
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _OverloadYield;
+function _OverloadYield(value, kind) {
+  this.v = value;
+  this.k = kind;
 }
-module.exports = _OverloadYield, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=OverloadYield.js.map

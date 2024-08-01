@@ -1,8 +1,15 @@
-function _isNativeFunction(t) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _isNativeFunction;
+function _isNativeFunction(fn) {
   try {
-    return -1 !== Function.toString.call(t).indexOf("[native code]");
-  } catch (n) {
-    return "function" == typeof t;
+    return Function.toString.call(fn).indexOf("[native code]") !== -1;
+  } catch (e) {
+    return typeof fn === "function";
   }
 }
-module.exports = _isNativeFunction, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=isNativeFunction.js.map
