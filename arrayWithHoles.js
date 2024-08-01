@@ -1,4 +1,11 @@
-function _arrayWithHoles(r) {
-  if (Array.isArray(r)) return r;
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _arrayWithHoles;
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
 }
-module.exports = _arrayWithHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=arrayWithHoles.js.map

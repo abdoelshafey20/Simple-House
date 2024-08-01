@@ -1,10 +1,25 @@
-function _classApplyDescriptorDestructureSet(e, t) {
-  if (t.set) return "__destrObj" in t || (t.__destrObj = {
-    set value(r) {
-      t.set.call(e, r);
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _classApplyDescriptorDestructureSet;
+function _classApplyDescriptorDestructureSet(receiver, descriptor) {
+  if (descriptor.set) {
+    if (!("__destrObj" in descriptor)) {
+      descriptor.__destrObj = {
+        set value(v) {
+          descriptor.set.call(receiver, v);
+        }
+      };
     }
-  }), t.__destrObj;
-  if (!t.writable) throw new TypeError("attempted to set read only private field");
-  return t;
+    return descriptor.__destrObj;
+  } else {
+    if (!descriptor.writable) {
+      throw new TypeError("attempted to set read only private field");
+    }
+    return descriptor;
+  }
 }
-module.exports = _classApplyDescriptorDestructureSet, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=classApplyDescriptorDestructureSet.js.map

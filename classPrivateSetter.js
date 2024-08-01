@@ -1,5 +1,13 @@
-var assertClassBrand = require("./assertClassBrand.js");
-function _classPrivateSetter(s, r, a, t) {
-  return r(assertClassBrand(s, a), t), t;
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _classPrivateSetter;
+var _assertClassBrand = require("./assertClassBrand.js");
+function _classPrivateSetter(privateMap, setter, receiver, value) {
+  setter((0, _assertClassBrand.default)(privateMap, receiver), value);
+  return value;
 }
-module.exports = _classPrivateSetter, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=classPrivateSetter.js.map

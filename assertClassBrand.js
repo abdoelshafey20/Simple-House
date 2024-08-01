@@ -1,5 +1,14 @@
-function _assertClassBrand(e, t, n) {
-  if ("function" == typeof e ? e === t : e.has(t)) return arguments.length < 3 ? t : n;
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _assertClassBrand;
+function _assertClassBrand(brand, receiver, returnValue) {
+  if (typeof brand === "function" ? brand === receiver : brand.has(receiver)) {
+    return arguments.length < 3 ? receiver : returnValue;
+  }
   throw new TypeError("Private element is not present on this object");
 }
-module.exports = _assertClassBrand, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=assertClassBrand.js.map

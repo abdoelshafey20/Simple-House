@@ -1,5 +1,12 @@
-var classPrivateFieldGet2 = require("./classPrivateFieldGet2.js");
-function _classExtractFieldDescriptor(e, t) {
-  return classPrivateFieldGet2(t, e);
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _classExtractFieldDescriptor;
+var _classPrivateFieldGet = require("classPrivateFieldGet2");
+function _classExtractFieldDescriptor(receiver, privateMap) {
+  return _classPrivateFieldGet(privateMap, receiver);
 }
-module.exports = _classExtractFieldDescriptor, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=classExtractFieldDescriptor.js.map

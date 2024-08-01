@@ -1,50 +1,60 @@
-var unsupportedIterableToArray = require("./unsupportedIterableToArray.js");
-function _createForOfIteratorHelper(r, e) {
-  var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
-  if (!t) {
-    if (Array.isArray(r) || (t = unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) {
-      t && (r = t);
-      var _n = 0,
-        F = function F() {};
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _createForOfIteratorHelper;
+var _unsupportedIterableToArray = require("unsupportedIterableToArray");
+function _createForOfIteratorHelper(o, allowArrayLike) {
+  var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
+  if (!it) {
+    if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+      if (it) o = it;
+      var i = 0;
+      var F = function () {};
       return {
         s: F,
-        n: function n() {
-          return _n >= r.length ? {
-            done: !0
-          } : {
-            done: !1,
-            value: r[_n++]
+        n: function () {
+          if (i >= o.length) return {
+            done: true
+          };
+          return {
+            done: false,
+            value: o[i++]
           };
         },
-        e: function e(r) {
-          throw r;
+        e: function (e) {
+          throw e;
         },
         f: F
       };
     }
     throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
-  var o,
-    a = !0,
-    u = !1;
+  var normalCompletion = true,
+    didErr = false,
+    err;
   return {
-    s: function s() {
-      t = t.call(r);
+    s: function () {
+      it = it.call(o);
     },
-    n: function n() {
-      var r = t.next();
-      return a = r.done, r;
+    n: function () {
+      var step = it.next();
+      normalCompletion = step.done;
+      return step;
     },
-    e: function e(r) {
-      u = !0, o = r;
+    e: function (e) {
+      didErr = true;
+      err = e;
     },
-    f: function f() {
+    f: function () {
       try {
-        a || null == t["return"] || t["return"]();
+        if (!normalCompletion && it.return != null) it.return();
       } finally {
-        if (u) throw o;
+        if (didErr) throw err;
       }
     }
   };
 }
-module.exports = _createForOfIteratorHelper, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=createForOfIteratorHelper.js.map

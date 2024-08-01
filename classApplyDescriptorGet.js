@@ -1,4 +1,14 @@
-function _classApplyDescriptorGet(e, t) {
-  return t.get ? t.get.call(e) : t.value;
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _classApplyDescriptorGet;
+function _classApplyDescriptorGet(receiver, descriptor) {
+  if (descriptor.get) {
+    return descriptor.get.call(receiver);
+  }
+  return descriptor.value;
 }
-module.exports = _classApplyDescriptorGet, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=classApplyDescriptorGet.js.map

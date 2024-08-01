@@ -1,4 +1,13 @@
-function _classCallCheck(a, n) {
-  if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _classCallCheck;
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
 }
-module.exports = _classCallCheck, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=classCallCheck.js.map

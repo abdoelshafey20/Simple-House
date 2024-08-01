@@ -1,5 +1,12 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _classPrivateFieldKey;
 var id = 0;
-function _classPrivateFieldKey(e) {
-  return "__private_" + id++ + "_" + e;
+function _classPrivateFieldKey(name) {
+  return "__private_" + id++ + "_" + name;
 }
-module.exports = _classPrivateFieldKey, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=classPrivateFieldLooseKey.js.map

@@ -1,7 +1,16 @@
-var classApplyDescriptorGet = require("./classApplyDescriptorGet.js");
-var assertClassBrand = require("./assertClassBrand.js");
-var classCheckPrivateStaticFieldDescriptor = require("./classCheckPrivateStaticFieldDescriptor.js");
-function _classStaticPrivateFieldSpecGet(t, s, r) {
-  return assertClassBrand(s, t), classCheckPrivateStaticFieldDescriptor(r, "get"), classApplyDescriptorGet(t, r);
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _classStaticPrivateFieldSpecGet;
+var _classApplyDescriptorGet = require("classApplyDescriptorGet");
+var _assertClassBrand = require("assertClassBrand");
+var _classCheckPrivateStaticFieldDescriptor = require("classCheckPrivateStaticFieldDescriptor");
+function _classStaticPrivateFieldSpecGet(receiver, classConstructor, descriptor) {
+  _assertClassBrand(classConstructor, receiver);
+  _classCheckPrivateStaticFieldDescriptor(descriptor, "get");
+  return _classApplyDescriptorGet(receiver, descriptor);
 }
-module.exports = _classStaticPrivateFieldSpecGet, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=classStaticPrivateFieldSpecGet.js.map

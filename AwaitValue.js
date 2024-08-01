@@ -1,4 +1,11 @@
-function _AwaitValue(t) {
-  this.wrapped = t;
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _AwaitValue;
+function _AwaitValue(value) {
+  this.wrapped = value;
 }
-module.exports = _AwaitValue, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+//# sourceMappingURL=AwaitValue.js.map
